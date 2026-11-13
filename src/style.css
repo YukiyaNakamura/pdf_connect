@@ -1,0 +1,192 @@
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --text: #1c2026;
+  --muted: #5c6470;
+  --border: #d9dde3;
+  --primary: #2459d6;
+  --primary-hover: #1b47b0;
+  --primary-soft: #e8efff;
+  --danger: #b42318;
+  --danger-soft: #fdecea;
+  --radius: 10px;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14161a;
+    --surface: #1e2127;
+    --text: #e8eaee;
+    --muted: #a0a7b2;
+    --border: #353a43;
+    --primary: #6b98ff;
+    --primary-hover: #8cb0ff;
+    --primary-soft: #1f2a44;
+    --danger: #ff8a80;
+    --danger-soft: #3a1f1d;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+  display: grid;
+  gap: 24px;
+}
+
+h1 { margin: 0 0 4px; font-size: 1.6rem; }
+h2 { margin: 0; font-size: 1.1rem; }
+.lead { margin: 0; color: var(--muted); font-size: 0.92rem; }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- ボタン ---------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 20px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.button-primary { background: var(--primary); color: #fff; width: 100%; }
+.button-primary:hover:not(:disabled) { background: var(--primary-hover); }
+.button-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.button-secondary { background: var(--surface); color: var(--primary); border-color: var(--primary); }
+.button-secondary:focus-within { outline: 3px solid var(--primary); outline-offset: 2px; }
+
+.button-link {
+  background: none; border: none; padding: 8px;
+  color: var(--muted); font: inherit; font-size: 0.9rem;
+  text-decoration: underline; cursor: pointer;
+}
+
+:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+
+/* ---------- ドロップゾーン ---------- */
+.dropzone {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 32px 16px;
+  text-align: center;
+  transition: border-color 0.15s, background 0.15s;
+}
+.dropzone.is-dragover { border-color: var(--primary); background: var(--primary-soft); }
+.dropzone-text { margin: 0; font-weight: 600; }
+.dropzone-or { margin: 4px 0 12px; color: var(--muted); font-size: 0.85rem; }
+
+/* タッチ端末ではドラッグ＆ドロップを使わないので文言を控えめに */
+@media (hover: none) {
+  .dropzone-text, .dropzone-or { display: none; }
+  .dropzone { padding: 20px 16px; }
+}
+
+/* ---------- ファイル一覧 ---------- */
+.list-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.count { font-weight: 400; color: var(--muted); font-size: 0.9rem; }
+.empty { margin: 0; padding: 16px; text-align: center; color: var(--muted); font-size: 0.9rem; }
+
+.file-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 10px 10px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.file-item.is-error { border-color: var(--danger); background: var(--danger-soft); }
+
+.order {
+  flex: none;
+  width: 28px; height: 28px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-weight: 700; font-size: 0.85rem;
+}
+.is-error .order { background: var(--danger); color: #fff; }
+
+.info { flex: 1; min-width: 0; display: grid; }
+.name { font-weight: 600; overflow-wrap: anywhere; }
+.meta { color: var(--muted); font-size: 0.85rem; }
+.error { color: var(--danger); font-size: 0.85rem; font-weight: 600; }
+
+.actions { flex: none; display: flex; gap: 4px; }
+.icon-button {
+  width: 44px; height: 44px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1.1rem;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.icon-button:hover:not(:disabled) { border-color: var(--primary); color: var(--primary); }
+.icon-button:disabled { opacity: 0.3; cursor: not-allowed; }
+.icon-remove:hover:not(:disabled) { border-color: var(--danger); color: var(--danger); }
+
+/* ---------- 結合 ---------- */
+.merge {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.field-label { font-weight: 600; font-size: 0.95rem; }
+.filename-row { display: flex; align-items: center; gap: 6px; }
+.filename-row input {
+  flex: 1; min-width: 0;
+  min-height: 48px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 16px; /* iOSでの自動ズームを防ぐ */
+}
+.ext { color: var(--muted); }
+
+.message {
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: var(--danger-soft);
+  color: var(--danger);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+@media (max-width: 420px) {
+  .file-item { gap: 8px; padding-left: 10px; }
+  .icon-button { width: 40px; height: 44px; }
+}

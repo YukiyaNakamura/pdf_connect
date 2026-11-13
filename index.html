@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PDF結合</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>PDF結合</h1>
+        <p class="lead">PDFを追加して順番を並べ替え、1つのファイルにまとめます。ファイルはブラウザ内だけで処理され、外部に送信されません。</p>
+      </header>
+
+      <section aria-labelledby="add-heading">
+        <h2 id="add-heading" class="visually-hidden">PDFを追加</h2>
+        <div id="dropzone" class="dropzone">
+          <p class="dropzone-text">ここにPDFをドラッグ＆ドロップ</p>
+          <p class="dropzone-or">または</p>
+          <label class="button button-secondary">
+            ファイルを選択
+            <input id="file-input" type="file" accept="application/pdf,.pdf" multiple class="visually-hidden" />
+          </label>
+        </div>
+      </section>
+
+      <section aria-labelledby="list-heading">
+        <div class="list-header">
+          <h2 id="list-heading">ファイル一覧 <span id="count" class="count"></span></h2>
+          <button id="clear" type="button" class="button-link" hidden>すべて削除</button>
+        </div>
+        <p id="empty" class="empty">まだPDFが追加されていません</p>
+        <ol id="file-list" class="file-list"></ol>
+      </section>
+
+      <section aria-labelledby="merge-heading" class="merge">
+        <h2 id="merge-heading" class="visually-hidden">結合してダウンロード</h2>
+        <label for="filename" class="field-label">保存するファイル名</label>
+        <div class="filename-row">
+          <input id="filename" type="text" value="merged" autocomplete="off" spellcheck="false" />
+          <span class="ext">.pdf</span>
+        </div>
+        <div id="message" class="message" role="alert" hidden></div>
+        <button id="merge" type="button" class="button button-primary" disabled>結合してダウンロード</button>
+      </section>
+
+      <div id="live" class="visually-hidden" aria-live="polite"></div>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
