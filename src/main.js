@@ -1,3 +1,5 @@
+import './tabs.js';
+import './shorten.js';
 import { inspectPdf, mergePdfs, looksLikePdf, errorMessage, toSafeFilename, formatSize } from './pdf.js';
 
 /**

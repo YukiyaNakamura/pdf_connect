@@ -29,6 +29,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 
 body {
   margin: 0;
@@ -153,8 +154,34 @@ h2 { margin: 0; font-size: 1.1rem; }
 .icon-button:disabled { opacity: 0.3; cursor: not-allowed; }
 .icon-remove:hover:not(:disabled) { border-color: var(--danger); color: var(--danger); }
 
-/* ---------- 結合 ---------- */
-.merge {
+/* ---------- タブ ---------- */
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.tab {
+  min-height: 44px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.tab:hover { color: var(--text); }
+.tab[aria-selected="true"] { background: var(--primary); color: #fff; }
+
+.panel { display: grid; gap: 24px; }
+
+/* ---------- カード・入力 ---------- */
+.card {
   display: grid;
   gap: 10px;
   padding: 16px;
@@ -164,8 +191,8 @@ h2 { margin: 0; font-size: 1.1rem; }
 }
 .field-label { font-weight: 600; font-size: 0.95rem; }
 .filename-row { display: flex; align-items: center; gap: 6px; }
-.filename-row input {
-  flex: 1; min-width: 0;
+.text-input {
+  width: 100%;
   min-height: 48px;
   padding: 0 12px;
   border: 1px solid var(--border);
@@ -175,7 +202,18 @@ h2 { margin: 0; font-size: 1.1rem; }
   font: inherit;
   font-size: 16px; /* iOSでの自動ズームを防ぐ */
 }
+.filename-row .text-input { flex: 1; min-width: 0; }
+.text-input[aria-invalid="true"] { border-color: var(--danger); }
 .ext { color: var(--muted); }
+
+/* ---------- URL短縮 ---------- */
+.copy-row { display: flex; gap: 8px; }
+.copy-row .text-input { flex: 1; min-width: 0; font-weight: 600; }
+.copy-row .button { flex: none; min-width: 96px; }
+.copy-status { margin: 0; min-height: 1.4em; font-size: 0.85rem; color: var(--primary); }
+.copy-status.is-error { color: var(--danger); }
+.original { margin: 0; font-size: 0.85rem; color: var(--muted); overflow-wrap: anywhere; }
+.original a { color: var(--primary); }
 
 .message {
   padding: 12px 14px;
